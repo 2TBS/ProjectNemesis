@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: bb85b579db2fada40b7943ba8d583b98
+timeCreated: 1483841422
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: FatCow
+  fontNames:
+  - FatCow
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
