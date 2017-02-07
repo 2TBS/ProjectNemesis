@@ -31,7 +31,7 @@ public class Minion : MonoBehaviour {
 
 	void OnTriggerEnter (Collider col) {
 		//3 types of triggers: turn left, turn right, go to nearest tower.
-
+        //...
 		switch(col.tag) {
 
 			case "TurnLeft":
