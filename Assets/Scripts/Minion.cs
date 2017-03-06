@@ -8,7 +8,7 @@ public class Minion : MonoBehaviour {
 	CharacterController controller;
 	MinionState currState;
 
-	const float SPEED = 0.5f;
+	public const float SPEED = 0.5f;
 
 
 	///Someone PLEASE make an animation controller with this 
