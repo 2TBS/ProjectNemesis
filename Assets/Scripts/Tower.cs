@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
-	public RectTransform theTower, closestMinion = null;
+	public Transform theTower, closestMinion = null;
 	public GameObject projectile;
 	public bool shooting = false;
 	public const float MIN_DISTANCE = 2, //how close projectile must be to minion in order to register as hit
-						PROJ_SPEED = 2; //projectile speed in units per frame 
+						PROJ_SPEED = 2,
+						FIRING_RANGE = 20; //projectile speed in units per frame 
 
 	protected GameObject currProj;
 
 
 	// Use this for initialization
 	void Start () {
-		
+		GetClosestMinion();
 	}
 	
 	// Update is called once per frame
@@ -26,29 +27,32 @@ public class Tower : MonoBehaviour {
 			MoveProjectile();
 	}
 
+	public void GetClosestMinion() {
+		foreach(GameObject minion in GameObject.FindGameObjectsWithTag("Minion")) {
+				if((theTower.position - minion.GetComponent<Transform>().position).magnitude < FIRING_RANGE || closestMinion == null)
+				closestMinion = minion.GetComponent<Transform>();
+			}
+	}
 	public void Shoot() {
 		
-			foreach(GameObject minion in GameObject.FindGameObjectsWithTag("Minion")) {
-				if((theTower.position - minion.GetComponent<RectTransform>().position).magnitude < closestMinion.position.magnitude || closestMinion == null)
-				closestMinion = minion.GetComponent<RectTransform>();
-			}
+			GetClosestMinion();
 
-			currProj = GameObject.Instantiate(projectile, theTower.position, Quaternion.identity);
-			currProj.transform.SetParent(GameObject.Find("The Map").GetComponent<Transform> ());
-			currProj.transform.LookAt(closestMinion);
-			
-			shooting = true;
+			if(closestMinion != null) {
+				currProj = GameObject.Instantiate(projectile, theTower.position, Quaternion.identity);
+				currProj.transform.SetParent(GameObject.Find("The Map").GetComponent<Transform> ());
+				currProj.transform.LookAt(closestMinion);
+
+				shooting = true;
+			}
 		}
 
 	public void MoveProjectile() {
 		if((currProj.transform.position - closestMinion.position).magnitude < MIN_DISTANCE) {
 				GameObject.Destroy(currProj);
-				Debug.Log("Done shooting");
 				shooting = false;
 			} else {
 				currProj.transform.LookAt(closestMinion);
 				currProj.transform.Translate(Vector3.forward * PROJ_SPEED);
-				Debug.Log("Shooting");
 			}
 	}
 }
