@@ -18,9 +18,9 @@ public class CameraMove : MonoBehaviour {
              transform.Translate(Vector3.up * Time.deltaTime * SCROLL_SPEED, Space.World);
     	else if (Input.mousePosition.y <= Screen.height*0.05) 
 			 transform.Translate(Vector3.down * Time.deltaTime * SCROLL_SPEED, Space.World);
-		else if (Input.mousePosition.x >= Screen.height*0.95) 
+		else if (Input.mousePosition.x >= Screen.width*0.95) 
 			 transform.Translate(Vector3.right * Time.deltaTime * SCROLL_SPEED, Space.World);
-		else if (Input.mousePosition.x <= Screen.height*0.05) 
+		else if (Input.mousePosition.x <= Screen.width*0.05) 
 			 transform.Translate(Vector3.left * Time.deltaTime * SCROLL_SPEED, Space.World);
 	}
 }

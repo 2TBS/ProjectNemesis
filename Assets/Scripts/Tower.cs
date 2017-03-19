@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
-	public Transform theTower, closestMinion = null;
+	public RectTransform theTower, closestMinion = null;
 	public GameObject projectile;
 	public bool shooting = false;
-	protected const float MIN_DISTANCE = 2, //how close projectile must be to minion in order to register as hit
-						   PROJ_SPEED = 2; //projectile speed in units per frame 
+	public const float MIN_DISTANCE = 2, //how close projectile must be to minion in order to register as hit
+						PROJ_SPEED = 2; //projectile speed in units per frame 
+
+	protected GameObject currProj;
 
 
 	// Use this for initialization
@@ -20,25 +22,33 @@ public class Tower : MonoBehaviour {
 	void Update () {
 		if(!shooting)
 			Shoot();
+		if(shooting)
+			MoveProjectile();
 	}
 
 	public void Shoot() {
 		
-		shooting = true;
+			foreach(GameObject minion in GameObject.FindGameObjectsWithTag("Minion")) {
+				if((theTower.position - minion.GetComponent<RectTransform>().position).magnitude < closestMinion.position.magnitude || closestMinion == null)
+				closestMinion = minion.GetComponent<RectTransform>();
+			}
 
-		foreach(GameObject minion in GameObject.FindGameObjectsWithTag("minion")) {
-			if((theTower.position - minion.GetComponent<Transform>().position).magnitude < closestMinion.position.magnitude || closestMinion == null)
-				closestMinion = minion.GetComponent<Transform>();
+			currProj = GameObject.Instantiate(projectile, theTower.position, Quaternion.identity);
+			currProj.transform.SetParent(GameObject.Find("The Map").GetComponent<Transform> ());
+			currProj.transform.LookAt(closestMinion);
+			
+			shooting = true;
 		}
 
-		GameObject currProj = GameObject.Instantiate(projectile, theTower.position, Quaternion.identity);
-		currProj.transform.LookAt(closestMinion);
-
+	public void MoveProjectile() {
 		if((currProj.transform.position - closestMinion.position).magnitude < MIN_DISTANCE) {
-			GameObject.Destroy(currProj);
-			shooting = false;
-		} else {
-			currProj.transform.Translate(Vector3.forward * PROJ_SPEED);
-		}
+				GameObject.Destroy(currProj);
+				Debug.Log("Done shooting");
+				shooting = false;
+			} else {
+				currProj.transform.LookAt(closestMinion);
+				currProj.transform.Translate(Vector3.forward * PROJ_SPEED);
+				Debug.Log("Shooting");
+			}
 	}
 }
