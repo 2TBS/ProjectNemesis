@@ -8,7 +8,7 @@ public class Tower : MonoBehaviour {
 	public GameObject projectile;
 	public bool shooting = false;
 	public const float MIN_DISTANCE = 2, //how close projectile must be to minion in order to register as hit
-						PROJ_SPEED = 2,
+						PROJ_SPEED = 5,
 						FIRING_RANGE = 20; //projectile speed in units per frame 
 
 	protected GameObject currProj;
@@ -21,6 +21,7 @@ public class Tower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		GetClosestMinion();
 		if(!shooting)
 			Shoot();
 		if(shooting)
@@ -35,7 +36,7 @@ public class Tower : MonoBehaviour {
 	}
 	public void Shoot() {
 		
-			GetClosestMinion();
+
 
 			if(closestMinion != null) {
 				currProj = GameObject.Instantiate(projectile, theTower.position, Quaternion.identity);

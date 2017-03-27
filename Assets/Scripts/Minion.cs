@@ -68,6 +68,9 @@ public class Minion : MonoBehaviour {
 			case "GotoTower":
 				currState = MinionState.ToTower;
 				break;
+			case "Destroy":
+				Destroy(gameObject);
+				break;
 		}
 	}
 }
