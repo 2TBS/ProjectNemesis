@@ -22,21 +22,7 @@ public class TowerCreate : MonoBehaviour {
 	void Update () {
 		
 			followMouseSprite.transform.position = Input.mousePosition;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 			//if(Input.GetMouseButtonDown(0))
-=======
-=======
->>>>>>> d498cabc876474023394e41717f54b3894a8aae9
-=======
->>>>>>> origin/develop
-            if (Input.GetMouseButtonDown(0))
-            {
-
-            }
-		}
->>>>>>> origin/develop
 	}
 
 	///Add to OnClickEvent for TowerCreateButton
