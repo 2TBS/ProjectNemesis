@@ -19,7 +19,10 @@ public class TowerCreate : MonoBehaviour {
 	void Update () {
 		if(placing) {
 			followMouseSprite.transform.position = Input.mousePosition;
-			if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
+            {
+
+            }
 		}
 	}
 

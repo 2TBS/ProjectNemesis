@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DarkRift.Client</name>
+    </assembly>
+    <members>
+        <member name="T:DarkRift.Client.DarkRiftClient">
+            <summary>
+                The client for DarkRift connections.
+            </summary>
+        </member>
+        <member name="E:DarkRift.Client.DarkRiftClient.MessageReceived">
+            <summary>
+                Event fired when a message is received.
+            </summary>
+        </member>
+        <member name="E:DarkRift.Client.DarkRiftClient.Disconnected">
+            <summary>
+                Event fired when the client becomes disconnected.
+            </summary>
+        </member>
+        <member name="P:DarkRift.Client.DarkRiftClient.ID">
+            <summary>
+                The ID the client has been assigned.
+            </summary>
+        </member>
+        <member name="P:DarkRift.Client.DarkRiftClient.Connected">
+            <summary>
+                Returns whether or not this client is connected to the server.
+            </summary>
+        </member>
+        <member name="F:DarkRift.Client.DarkRiftClient.connection">
+            <summary>
+                The connection to the remote server.
+            </summary>
+        </member>
+        <member name="F:DarkRift.Client.DarkRiftClient.setupMutex">
+            <summary>
+                Mutex that is triggered once the connection is completely setup.
+            </summary>
+        </member>
+        <member name="M:DarkRift.Client.DarkRiftClient.Connect(System.String,System.Int32,DarkRift.TransportProtocol,DarkRift.IPVersion)">
+            <summary>
+                Connects to a remote server.
+            </summary>
+            <param name="ip">The IP address of the server.</param>
+            <param name="port">The port of the server.</param>
+            <param name="protocol">The protocol to connect using.</param>
+            <param name="ipVersion">The IP version to connect using.</param>
+        </member>
+        <member name="M:DarkRift.Client.DarkRiftClient.ConnectInBackground(System.String,System.Int32,DarkRift.TransportProtocol,DarkRift.IPVersion,System.Action)">
+            <summary>
+                Connects to a remote server in the background.
+            </summary>
+            <param name="ip">The IP address of the server.</param>
+            <param name="port">The port of the server.</param>
+            <param name="protocol">The protocol to connect using.</param>
+            <param name="ipVersion">The IP version to connect using.</param>
+            <param name="callback">The callback to invoke one the connection attempt has finished.</param>
+        </member>
+        <member name="M:DarkRift.Client.DarkRiftClient.Connection_DataReceived(System.Object,Hazel.DataReceivedEventArgs)">
+            <summary>
+                Callback for when data is received.
+            </summary>
+            <param name="sender">The connection that received data.</param>
+            <param name="e">The data received.</param>
+        </member>
+        <member name="M:DarkRift.Client.DarkRiftClient.HandleCommand(DarkRift.MessageFrame)">
+            <summary>
+                Handles a command received.
+            </summary>
+            <param name="bytes">The bytes received.</param>
+        </member>
+        <member name="M:DarkRift.Client.DarkRiftClient.HandleMessage(DarkRift.MessageFrame)">
+            <summary>
+                Handles a message received.
+            </summary>
+            <param name="bytes">The bytes received.</param>
+        </member>
+        <member name="M:DarkRift.Client.DarkRiftClient.Connection_Disconnected(System.Object,Hazel.DisconnectedEventArgs)">
+            <summary>
+                Called when this connection becomes disconnected.
+            </summary>
+            <param name="sender">The origin of the event.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:DarkRift.Client.DarkRiftClient.SendMessage(DarkRift.Message,DarkRift.SendMode)">
+            <summary>
+                Sends a message to the server.
+            </summary>
+            <param name="message">The message to send.</param>
+        </member>
+        <member name="T:DarkRift.Client.DisconnectedEventArgs">
+            <summary>
+                Arguments for disconnection events.
+            </summary>
+            <remarks>
+                There are currently no members to this class, it is here for future use.
+            </remarks>
+        </member>
+        <member name="T:DarkRift.Client.MessageReceivedEventArgs">
+            <summary>
+                Arguments for <see cref="E:DarkRift.Client.DarkRiftClient.MessageReceived">MessageReceived</see> events.
+            </summary>
+        </member>
+        <member name="P:DarkRift.Client.MessageReceivedEventArgs.Message">
+            <summary>
+                The message received.
+            </summary>
+        </member>
+    </members>
+</doc>
