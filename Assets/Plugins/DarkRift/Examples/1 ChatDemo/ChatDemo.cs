@@ -79,7 +79,7 @@ public class ChatDemo : MonoBehaviour
             Debug.LogError("No client assigned to Chat component!");
             return;
         }
-
+        
         //First we need to build a DarkRiftWriter to put the data we want to send in, it'll default to Unicode 
         //encoding so we don't need to worry about that
         DarkRiftWriter writer = new DarkRiftWriter();
