@@ -9,7 +9,9 @@ public class TowerCreate : MonoBehaviour {
 	public Image towerImage; //Which tower is this?
 	public Image followMouseSprite; //follows the mouse until put down
 	public Sprite blankImage;
-	public Object towerPrefab;
+	public GameObject towerPrefab;
+	public GameObject map;
+	public GameObject towerClone;
 	public bool placing; //Is the player currently placing a tower?
 
 	// Use this for initialization
@@ -20,22 +22,27 @@ public class TowerCreate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetMouseButtonDown(0) && placing) {
+			towerClone = Instantiate (towerPrefab, new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0), Quaternion.identity) as GameObject;
+			//towerClone.transform.parent = map.transform;
+			towerClone.transform.SetParent (map.transform, false);
+			followMouseSprite.sprite = blankImage;
+			placing = !placing;
+		} else if (placing) {
 			followMouseSprite.transform.position = Input.mousePosition;
+		}
 			//if(Input.GetMouseButtonDown(0))
 	}
 
 	///Add to OnClickEvent for TowerCreateButton
 	public void clickAction () {
-		placing = !placing;
-		if (placing) {
-			var v3 = Input.mousePosition;
-			v3.z = 10.0f;
-			//v3 = Camera.main.ScreenToWorldPoint (v3);
-			GameObject tower = Instantiate (towerPrefab, v3, Quaternion.identity) as GameObject;
-			followMouseSprite.sprite = blankImage;
-		} else {
+
+		if (!placing) {
 			followMouseSprite.sprite = towerImage.sprite;
+		} else if (placing) {
+			followMouseSprite.sprite = blankImage;
 		}
+		placing = !placing;
+
 	}
 }
