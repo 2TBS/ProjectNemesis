@@ -9,6 +9,8 @@ public class MinionSpawner : MonoBehaviour {
 	Slider tempSlider;
 	public Object minionPrefab;
 
+	int count;
+
 	// Use this for initialization
 	void Start () {
 		tempSlider = GameObject.Find("tempMinionSpawn").GetComponent<Slider> ();
@@ -24,6 +26,8 @@ public class MinionSpawner : MonoBehaviour {
 		while(true) {
 			GameObject minion = Instantiate(minionPrefab, new Vector3(-100,25,0), Quaternion.identity) as GameObject;
 			minion.transform.SetParent(GameObject.Find("The Map").transform);
+			minion.name = "Minion " + count;
+			count++;
 			Debug.Log("Spawned minion. waiting " + 10/tempSlider.value + " secs");
 			yield return new WaitForSeconds(10/tempSlider.value);
 		}
