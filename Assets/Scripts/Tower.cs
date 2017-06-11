@@ -48,12 +48,17 @@ public class Tower : MonoBehaviour {
 		}
 
 	public void MoveProjectile() {
-		if((currProj.transform.position - closestMinion.position).magnitude < MIN_DISTANCE) {
+		try {
+			if((currProj.transform.position - closestMinion.position).magnitude < MIN_DISTANCE) {
 				GameObject.Destroy(currProj);
 				shooting = false;
 			} else {
 				currProj.transform.LookAt(closestMinion);
 				currProj.transform.Translate(Vector3.forward * PROJ_SPEED);
 			}
+		} catch (MissingReferenceException ex) { //Target Not Found
+			GameObject.Destroy(currProj);
+		}
+		
 	}
 }
