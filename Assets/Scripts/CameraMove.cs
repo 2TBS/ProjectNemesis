@@ -8,9 +8,11 @@ public class CameraMove : MonoBehaviour {
 	Camera theCamera;
 	float fov;
 	public const float SCROLL_SPEED = 200f;
-	public const float MOUSE_SCROLL_SPEED = 8f;
-	public const float MAP_HEIGHT = 125f;
-	public const float MAP_WIDTH = 250f;
+	public const float MOUSE_SCROLL_SPEED = 12f;
+	public const float MAP_HEIGHT = 200f;
+	public const float MAP_WIDTH = 500f;
+	public const float MAX_FOV = 60f;
+	public const float MIN_FOV = 25f;
 
 	// Use this for initialization
 	void Start () {
@@ -30,10 +32,10 @@ public class CameraMove : MonoBehaviour {
 
 		fov = theCamera.fieldOfView;
 
-		if (Input.GetAxis("Mouse ScrollWheel") < 0 && fov < 55)
+		if (Input.GetAxis("Mouse ScrollWheel") < 0 && fov < MAX_FOV)
 			theCamera.fieldOfView += MOUSE_SCROLL_SPEED;
         	
-     	if (Input.GetAxis("Mouse ScrollWheel") > 0 && fov > 25)
+     	if (Input.GetAxis("Mouse ScrollWheel") > 0 && fov > MIN_FOV)
 			 theCamera.fieldOfView -= MOUSE_SCROLL_SPEED;
 	}
 }
