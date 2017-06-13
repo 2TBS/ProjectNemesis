@@ -14,13 +14,14 @@ public class TowerCreate : MonoBehaviour {
 	private GameObject towerClone;
 	public bool placing; //Is the player currently placing a tower?
 	public Grid gridObj; //GameObject containing the script for the Grid
+	public Player owner; //Who is pressing the button?
 
 	// Use this for initialization
 	void Start () {
 		//followMouseSprite.sprite = towerImage.sprite;
 		followMouseSprite.transform.position = new Vector3(100000000, 0, 0);
 		placing = false;
-		
+		owner = GetComponentInParent<Player>();
 	}
 	
 	// Update is called once per frame
@@ -30,7 +31,7 @@ public class TowerCreate : MonoBehaviour {
 		else if (placing)
 			followMouseSprite.transform.position = Input.mousePosition;
 		
-		foreach(GameObject tile in gridObj.GridArray) tile.GetComponent<Image>().color = (placing) ? new Color (0f, 1f, 0f, 0.3f) : Color.clear;
+		foreach(GridTile tile in gridObj.gridArray) tile.GetComponent<Image>().color = (!placing) ? Color.clear : (tile.placeable) ? new Color (0f, 1f, 0f, 0.3f) : new Color (1f, 0f, 0f, 0.3f);
 		
 	}
 
@@ -40,8 +41,7 @@ public class TowerCreate : MonoBehaviour {
 		
 		if(placing) {
 			
-			towerClone = Instantiate (towerPrefab, gridObj.Raycast().transform.position, Quaternion.identity) as GameObject;
-			towerClone.transform.SetParent (map.transform, false);
+			gridObj.GetGridTile(owner).CreateObject(towerPrefab);
 			followMouseSprite.sprite = blankImage;
 			placing = !placing;
 			
@@ -50,13 +50,7 @@ public class TowerCreate : MonoBehaviour {
 
 	///Add to OnClickEvent for TowerCreateButton
 	public void clickAction () {
-
-		if (!placing) {
-			followMouseSprite.sprite = towerImage.sprite;
-		} else if (placing) {
-			followMouseSprite.sprite = blankImage;
-		}
 		placing = !placing;
-
+		followMouseSprite.sprite = (placing) ? towerImage.sprite : blankImage;
 	}
 }

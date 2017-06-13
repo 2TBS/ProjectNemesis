@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
  
 public class Grid : MonoBehaviour {
    
@@ -8,23 +9,23 @@ public class Grid : MonoBehaviour {
 	public int mapWidth; //Width in units of map
 	public int tileSize; //Height and width in units of each tile
 	public GameObject tilePrefab; //Prefab for an individual tile
-    private GameObject tempUnitTile;
+    private GridTile tempUnitTile;
     private int i;
     private int columns;
     private int rows;
-    public Camera m_Camera; //main camera
    
-    public ArrayList GridArray; //complete list of grid tiles. Use with a foreach loop for maximum efficiency.
+    public List<GridTile> gridArray; //complete list of grid tiles. Use with a foreach loop for maximum efficiency.
  
 private void Awake() {      
-        GridArray = new ArrayList();
+        gridArray = new List<GridTile>();
         for (i = 0; i < (mapHeight * mapWidth) / (tileSize * tileSize); i++)
         {
-            tempUnitTile = GameObject.Instantiate(tilePrefab, new Vector2(-(mapHeight/2) + (tileSize * rows) , -(mapWidth/2) + (tileSize * columns)), Quaternion.identity) as GameObject;
-            tempUnitTile.name = "Tile " + (i + 1);
-			tempUnitTile.transform.SetParent(GameObject.Find("The Map").transform);
-           
-            GridArray.Add(tempUnitTile);
+            tempUnitTile = GameObject.Instantiate(tilePrefab, new Vector2(-(mapHeight/2) + (tileSize * rows) , -(mapWidth/2) + (tileSize * columns)), Quaternion.identity).GetComponent<GridTile>();
+            tempUnitTile.name = "Tile " + (i + 1) + "(" + columns + "," + rows + ")";
+			tempUnitTile.transform.SetParent(GameObject.Find("Grid").transform);
+            tempUnitTile.x = columns;
+            tempUnitTile.y = rows;
+            gridArray.Add(tempUnitTile);
             columns++;
            
             if (tileSize * columns == mapWidth)
@@ -35,17 +36,17 @@ private void Awake() {
         }
     }
    
-   
-    public GameObject Raycast () {
+   ///Returns the GridTile that the mouse is over at this time.
+    public GridTile GetGridTile (Player owner) {
         RaycastHit hit;
         string colliderName;
-        GameObject m_TileHit;
+        GridTile m_TileHit;
        
-        if (!Physics.Raycast(m_Camera.ScreenPointToRay(Input.mousePosition), out hit, 1000f))
+        if (!Physics.Raycast(owner.cam.ScreenPointToRay(Input.mousePosition), out hit, 1000f))
             return null;
        
         colliderName = hit.collider.name;
-        m_TileHit = hit.collider.gameObject;
+        m_TileHit = hit.collider.GetComponent<GridTile> ();
         Debug.Log(colliderName);
         return m_TileHit;
     }
