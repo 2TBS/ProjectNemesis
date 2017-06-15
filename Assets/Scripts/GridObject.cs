@@ -19,7 +19,12 @@ public class GridObject : MonoBehaviour {
 		lClickCanvas.enabled = lClick;
 		rClickCanvas.enabled = rClick;
 
-		lClickCanvas.transform.position = rClickCanvas.transform.position;
+		lClickCanvas.transform.position = rClickCanvas.transform.position = ownerTile.transform.position;
+
+		if(ownerTile.MouseOver()) {
+			if(Input.GetMouseButtonDown(0)) lClick = !lClick;
+			else if(Input.GetMouseButtonDown(1)) rClick = !rClick;
+		}
 	}
 
 	///Left Click Action

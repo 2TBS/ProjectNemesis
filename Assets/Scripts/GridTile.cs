@@ -39,4 +39,9 @@ public class GridTile : MonoBehaviour {
 		}
 		
 	}
+
+	///Returns if the mouse is currently over this tile
+	public bool MouseOver () {
+		return theGrid.GetGridTile(owner).Equals(this);
+	}
 }
