@@ -6,12 +6,12 @@ using UnityEngine;
 public class GridObject : MonoBehaviour {
 
 	public bool lClick, rClick; //If the left and right click menus
-	public GridTile ownerTile; //The tile that the object is located in
+	protected GridTile ownerTile; //The tile that the object is located in
 	public Canvas lClickCanvas, rClickCanvas; //what shows up when you left/right click
 
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
