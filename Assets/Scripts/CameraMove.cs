@@ -29,9 +29,7 @@ public class CameraMove : MonoBehaviour {
 			 transform.Translate(Vector3.right * Time.deltaTime * SCROLL_SPEED, Space.World);
 		else if (Input.mousePosition.x <= Screen.width*0.05 && transform.position.x - fov > -MAP_WIDTH) //left
 			 transform.Translate(Vector3.left * Time.deltaTime * SCROLL_SPEED, Space.World);
-
 		fov = theCamera.fieldOfView;
-
 		if (Input.GetAxis("Mouse ScrollWheel") < 0 && fov < MAX_FOV)
 			theCamera.fieldOfView += MOUSE_SCROLL_SPEED;
         	
