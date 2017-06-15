@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour {
+public class Tower : GridObject {
 
 	public Transform theTower;
 	public GameObject projectile;
@@ -60,7 +60,7 @@ public class Tower : MonoBehaviour {
 			} else {
 				currProj.transform.position = Vector3.MoveTowards(currProj.transform.position, closestMinion.transform.position, 2f);
 			}
-		} catch (MissingReferenceException ex) { //Target Not Found (probably destroyed)
+		} catch (MissingReferenceException) { //Target Not Found (probably destroyed)
 			GameObject.Destroy(currProj);
 			shooting = false;
 		}

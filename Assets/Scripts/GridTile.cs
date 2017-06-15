@@ -9,7 +9,7 @@ public class GridTile : MonoBehaviour {
 	///y-coordinate of the GridTile
 	public int y;
 	///What is currently inside the GridTile?
-	public GameObject currObj; 
+	public GridObject currObj; 
 	///Owner player of this tile (who can place stuff here)
 	public Player owner;
 	///Grid that this GridTile belongs to
@@ -33,7 +33,7 @@ public class GridTile : MonoBehaviour {
 	///Instantiates an object into this grid.
 	public void CreateObject (GameObject obj) {
 		if(placeable) {
-			currObj = Instantiate (obj, transform.position, Quaternion.identity) as GameObject;
+			currObj = Instantiate (obj, transform.position, Quaternion.identity).GetComponent<GridObject>();
 			currObj.transform.SetParent (transform);
 			placeable = false;
 		}
