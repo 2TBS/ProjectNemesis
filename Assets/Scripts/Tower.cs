@@ -10,7 +10,8 @@ public class Tower : GridObject {
 	public bool shooting = false;
 	public const float MIN_DISTANCE = 3, //how close projectile must be to minion in order to register as hit
 						PROJ_SPEED = 5,  //projectile speed in units per frame 
-						FIRING_RANGE = 50; //radius that the tower will fire into
+						FIRING_RANGE = 3, //radius that the tower will fire into
+						RANGE_SCALE_MULT = 1/250f; //amount to scale the Range circle image
 
 	protected GameObject currProj;
 	public Minion closestMinion;
@@ -19,6 +20,7 @@ public class Tower : GridObject {
 	// Use this for initialization
 	new void Start () {
 		GetClosestMinion();
+		range.transform.localScale = new Vector2(FIRING_RANGE, FIRING_RANGE) * RANGE_SCALE_MULT * ownerTile.theGrid.tileSize;
 	}
 	
 	// Update is called once per frame
@@ -37,9 +39,11 @@ public class Tower : GridObject {
 
 	public void GetClosestMinion() {
 		foreach(GameObject minion in GameObject.FindGameObjectsWithTag("Minion")) {
-			if((theTower.position - minion.transform.position).magnitude < FIRING_RANGE)
+			if((theTower.position - minion.transform.position).magnitude < FIRING_RANGE * ownerTile.theGrid.tileSize)
 					closestMinion = minion.GetComponent<Minion>();
-			}
+			else 
+				closestMinion = null;
+		}
 	}
 
 	public void Shoot() {
