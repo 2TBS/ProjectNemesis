@@ -27,7 +27,7 @@ public class GridTile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+	 	
 	}
 
 	///Instantiates an object into this grid.
@@ -35,6 +35,7 @@ public class GridTile : MonoBehaviour {
 		if(placeable) {
 			currObj = Instantiate (obj, transform.position, Quaternion.identity).GetComponent<GridObject>();
 			currObj.transform.SetParent (transform);
+			currObj.ownerTile = this;
 			placeable = false;
 		}
 		

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : GridObject {
 
@@ -13,21 +14,24 @@ public class Tower : GridObject {
 
 	protected GameObject currProj;
 	public Minion closestMinion;
-
+	public Image range;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		GetClosestMinion();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	new void Update () {
+
+		base.Update();
+
 		if(!shooting)
 			Shoot();
 		if(shooting)
 			MoveProjectile();
-
+		
+		range.enabled = lClick;
 
 	}
 

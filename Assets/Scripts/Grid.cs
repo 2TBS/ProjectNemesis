@@ -25,6 +25,7 @@ private void Awake() {
 			tempUnitTile.transform.SetParent(GameObject.Find("Grid").transform);
             tempUnitTile.x = columns;
             tempUnitTile.y = rows;
+            tempUnitTile.theGrid = this;
             gridArray.Add(tempUnitTile);
             columns++;
            
@@ -47,7 +48,6 @@ private void Awake() {
        
         colliderName = hit.collider.name;
         m_TileHit = hit.collider.GetComponent<GridTile> ();
-        Debug.Log(colliderName);
         return m_TileHit;
     }
    
