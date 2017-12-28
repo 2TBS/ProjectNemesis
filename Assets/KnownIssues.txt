@@ -1,0 +1,14 @@
+﻿Random UDP Disconnection:
+	UDP sometimes randomly disconnects after around 10 seconds.
+	Changing to TCP fixes this so it is an issue with Hazel.
+
+Temperamental UDP Connection:
+	Sometimes UDP will not connect to the server and report that it cannot be reached or worse, crash Unity.
+	Changing to TCP should fix the issue, alternatively just keep trying!
+
+Documentation is in a state:
+	Since I moved the documentation to the HTML help it's a bit of a mess, this should be cleared up and
+	rearranged in the next version.
+
+No complete project for Agar tutorial:
+	This will be in the next version once the documentation has been sorted out.
